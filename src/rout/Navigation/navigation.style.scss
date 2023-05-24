@@ -1,0 +1,13 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 10px;
+  & .logo {
+    margin-left: 15px;
+  }
+}
+.nav-link-container {
+  display: flex;
+  gap: 15px;
+}
