@@ -25,8 +25,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await signInWithPasswordAndEmail(email, password);
-      console.log(response);
+      await signInWithPasswordAndEmail(email, password);
       clearFormField();
     } catch (error) {
       switch (error.code) {
@@ -44,8 +43,7 @@ const SignInForm = () => {
 
   const logGoogleUser = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocumentFromAuth(user);
+      await signInWithGooglePopup();
     } catch (error) {
       if (error.code === 'auth/popup-closed-by-user') {
         return;
