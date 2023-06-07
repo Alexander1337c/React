@@ -1,0 +1,27 @@
+.shopping-cart-container {
+  margin: 0 auto;
+  width: 800px;
+  .shopping-cart-header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: center;
+    border-bottom: 1px solid black;
+    padding: 5px 0;
+    font-weight: bold;
+  }
+  :last-child {
+    justify-self: self-end;
+  }
+  .shopping-cart-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    span {
+      font-size: 18px;
+    }
+    h2 {
+      margin-left: 10px;
+      font-size: 22px;
+    }
+  }
+}

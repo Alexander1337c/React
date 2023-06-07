@@ -33,7 +33,7 @@ const Home = () => {
 
   return (
     <div>
-      <Menu categories={categories} />;
+      <Menu categories={categories} />
     </div>
   );
 };
