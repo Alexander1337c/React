@@ -1,4 +1,4 @@
-.category-container {
+.directory-container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
   cursor: pointer;
   overflow: hidden;
   opacity: 0.9;
-  &:hover > .category-body-container {
+  &:hover > .directory-body-container {
     opacity: 0.8;
     color: black;
   }
@@ -16,17 +16,17 @@
   }
 }
 
-.category-container:hover {
+.directory-container:hover {
   opacity: 1;
 }
-.category-container {
+.directory-container {
   grid-column: span 2;
 }
-.category-container:nth-last-child(-n + 2) {
+.directory-container:nth-last-child(-n + 2) {
   grid-column: span 3;
   height: 350px;
 }
-.category-body-container {
+.directory-body-container {
   background-color: #fff;
   padding: 10px 20px;
   border-radius: 3px;

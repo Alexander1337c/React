@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import { signInWithPopup, GoogleAuthProvider, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, setDoc, collection, writeBatch, query, getDocs } from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: "AIzaSyBLeoOYYVrF7jm8darL83TMyjvOxQM4pD8",
@@ -23,6 +23,31 @@ export const auth = getAuth();
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
 
 export const db = getFirestore();
+
+export const addCollectionandDocument = async (collectionKey, objectToAdd) => {
+    const collectionRef = collection(db, collectionKey);
+    const bath = writeBatch(db)
+
+    objectToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase());
+        bath.set(docRef, object)
+    });
+    await bath.commit();
+    console.log('done')
+}
+
+export const getCategoryAndDocument = async () => {
+    const collectionRef = collection(db, 'categories');
+    const q = query(collectionRef)
+
+    const querySnapShot = await getDocs(q)
+    const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
+        const { title, items } = docSnapShot.data();
+        acc[title.toLowerCase()] = items;
+        return acc;
+    }, {})
+    return categoryMap;
+}
 
 export const createUserDocumentFromAuth = async (userAuth,
     additionalInformation = {}

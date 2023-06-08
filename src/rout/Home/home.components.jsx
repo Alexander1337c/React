@@ -1,6 +1,5 @@
 import React from 'react';
 import Menu from '../../components/menu/menu.component';
-import { Outlet } from 'react-router-dom';
 
 const Home = () => {
   const categories = [

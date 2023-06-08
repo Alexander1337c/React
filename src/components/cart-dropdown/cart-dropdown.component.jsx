@@ -1,6 +1,10 @@
-import './cart-dropdown.style.scss';
+import {
+  CartDropdownContainer,
+  CartItems,
+  EmptyMessage,
+} from './cart-dropdown.style';
 import { Link } from 'react-router-dom';
-import Button from '../button/button.component';
+import Button, { BUTTON_TYPES_CLASSES } from '../button/button.component';
 import CartItem from '../cartItem/cart-item.component';
 import { useContext } from 'react';
 import { CartContext } from '../../context/itemContext';
@@ -9,16 +13,22 @@ const CartDropDown = () => {
   const { cartItems, cartIsOpen, setCartIsOpen } = useContext(CartContext);
   const openCart = () => setCartIsOpen(!cartIsOpen);
   return (
-    <div className='cart-dropdown-container'>
-      <div className='cart-items'>
-        {cartItems.map((item) => (
-          <CartItem key={item.id} cartItem={item} />
-        ))}
-      </div>
+    <CartDropdownContainer>
+      <CartItems>
+        {cartItems.length ? (
+          cartItems.map((item) => <CartItem key={item.id} cartItem={item} />)
+        ) : (
+          <EmptyMessage>Your cart is EMPTY</EmptyMessage>
+        )}
+      </CartItems>
       <Link to='/shopping-cart'>
-        <Button children={'GO TO CHECKOUT'} onClick={openCart} />
+        <Button
+          children={'GO TO CHECKOUT'}
+          onClick={openCart}
+          buttonTypes={BUTTON_TYPES_CLASSES.base}
+        />
       </Link>
-    </div>
+    </CartDropdownContainer>
   );
 };
 
