@@ -1,9 +1,18 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import './shopping-item.style.scss';
-import { CartContext } from '../../context/itemContext';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/selectCart';
+import {
+  addItemToCart,
+  decItemCart,
+  removeItem,
+} from '../../store/cart/cart.action';
 
 const ShoppingItem = ({ itemCart }) => {
-  const { addItemToCart, decItemCart, removeItem } = useContext(CartContext);
+  const dispatch = useDispatch();
+  // const { addItemToCart, decItemCart, removeItem } = null;
+  const items = useSelector(selectCartItems);
   const { imageUrl, name, quantity, curTotalPrice } = itemCart;
 
   return (
@@ -13,7 +22,7 @@ const ShoppingItem = ({ itemCart }) => {
       <div className='quantity'>
         <button
           onClick={() => {
-            decItemCart(itemCart);
+            dispatch(decItemCart(items, itemCart));
           }}
         >
           &#9668;
@@ -21,7 +30,7 @@ const ShoppingItem = ({ itemCart }) => {
         <span>{quantity}</span>
         <button
           onClick={() => {
-            addItemToCart(itemCart);
+            dispatch(addItemToCart(items, itemCart));
           }}
         >
           &#9658;
@@ -30,7 +39,7 @@ const ShoppingItem = ({ itemCart }) => {
       <span>{curTotalPrice}</span>
       <button
         onClick={() => {
-          removeItem(itemCart);
+          dispatch(removeItem(items, itemCart));
         }}
       >
         &#10005;

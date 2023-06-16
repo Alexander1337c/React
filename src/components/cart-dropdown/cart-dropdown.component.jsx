@@ -6,12 +6,17 @@ import {
 import { Link } from 'react-router-dom';
 import Button, { BUTTON_TYPES_CLASSES } from '../button/button.component';
 import CartItem from '../cartItem/cart-item.component';
-import { useContext } from 'react';
-import { CartContext } from '../../context/itemContext';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCartIsOpen, selectCartItems } from '../../store/cart/selectCart';
+import { setCartIsOpen } from '../../store/cart/cart.action';
 
 const CartDropDown = () => {
-  const { cartItems, cartIsOpen, setCartIsOpen } = useContext(CartContext);
-  const openCart = () => setCartIsOpen(!cartIsOpen);
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const cartIsOpen = useSelector(selectCartIsOpen);
+
+  const openCart = () => dispatch(setCartIsOpen(!cartIsOpen));
+
   return (
     <CartDropdownContainer>
       <CartItems>
