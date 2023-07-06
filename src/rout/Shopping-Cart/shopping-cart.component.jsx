@@ -3,6 +3,7 @@ import './shopping-cart.style.scss';
 import ShoppingItem from '../../components/shopping-item/shopping-item.component';
 import { useSelector } from 'react-redux';
 import { selectCartItems, selectCartPrice } from '../../store/cart/selectCart';
+import PaymantForm from '../../components/paymant-form/paymant-form.component';
 
 const ShoppingCart = () => {
   const cartItems = useSelector(selectCartItems);
@@ -25,6 +26,7 @@ const ShoppingCart = () => {
         <span>Total price:</span>
         <h2>{totalPrice}</h2>
       </div>
+      <PaymantForm />
     </div>
   );
 };

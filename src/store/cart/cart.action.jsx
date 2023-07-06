@@ -44,6 +44,10 @@ const decrementItem = (cartItems, productToDec) => {
 const itemRemove = (cartItems, productRemove) => {
   return cartItems.filter((item) => item.id !== productRemove.id);
 };
+const itemRemoveAll = (cartItems) => {
+  cartItems = [];
+  return cartItems;
+};
 
 export const setCartIsOpen = (bool) =>
   createAction(CART_ACTION_TYPE.CART_IS_OPEN, bool);
@@ -58,5 +62,10 @@ export const decItemCart = (cartItems, productToDec) => {
 };
 export const removeItem = (cartItems, productRemove) => {
   const newCartItem = itemRemove(cartItems, productRemove);
+  return createAction(CART_ACTION_TYPE.CART_UPDATE, newCartItem);
+};
+
+export const removeItems = (cartItems) => {
+  const newCartItem = itemRemoveAll(cartItems);
   return createAction(CART_ACTION_TYPE.CART_UPDATE, newCartItem);
 };

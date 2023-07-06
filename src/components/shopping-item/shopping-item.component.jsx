@@ -11,7 +11,6 @@ import {
 
 const ShoppingItem = ({ itemCart }) => {
   const dispatch = useDispatch();
-  // const { addItemToCart, decItemCart, removeItem } = null;
   const items = useSelector(selectCartItems);
   const { imageUrl, name, quantity, curTotalPrice } = itemCart;
 

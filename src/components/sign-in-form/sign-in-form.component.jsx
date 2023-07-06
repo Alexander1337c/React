@@ -1,13 +1,10 @@
-import {
-  auth,
-  signInWithGooglePopup,
-  createUserDocumentFromAuth,
-  signInWithPasswordAndEmail,
-} from '../../Utils/Firebase/firebase.utils';
+import { signInWithPasswordAndEmail } from '../../Utils/Firebase/firebase.utils';
+import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import InputForm from '../input-form/input-form.component';
 import Button, { BUTTON_TYPES_CLASSES } from '../button/button.component';
 import './sign-in-form.style.scss';
+import { googleSIgnIn, emailSignIn } from '../../store/user/user-action';
 
 const defaultField = {
   email: '',
@@ -15,6 +12,7 @@ const defaultField = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   const [formField, setFormField] = useState(defaultField);
   const { email, password } = formField;
 
@@ -25,7 +23,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await signInWithPasswordAndEmail(email, password);
+      dispatch(emailSignIn(email, password));
       clearFormField();
     } catch (error) {
       switch (error.code) {
@@ -43,7 +41,7 @@ const SignInForm = () => {
 
   const logGoogleUser = async () => {
     try {
-      await signInWithGooglePopup();
+      dispatch(googleSIgnIn());
     } catch (error) {
       if (error.code === 'auth/popup-closed-by-user') {
         return;
